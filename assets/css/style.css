@@ -1,0 +1,30 @@
+button {
+	margin: 5px;
+	background-color: #3b33ad;
+	border-color: #3b33ad;
+	padding: 10px;
+	color: white;
+	font-size: 15px;
+
+
+}
+
+button:hover {
+	cursor: pointer;
+	background-color: #5c53dc;
+}
+
+button:active {
+	background-color: #3b33ad;
+}
+
+p {
+	font-size: 20px;
+	color: white;
+
+}
+
+img {
+	max-width: 300px;
+	margin: 10px;
+}

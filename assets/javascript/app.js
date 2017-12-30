@@ -7,6 +7,8 @@ $(document).ready(function() {
 	// function to add the array to the html in button form
 	function addButtons() {
 
+		$("#button-area").empty();
+
 		for (let i = 0; i < topics.length; i++) {
 
 			let buttons = $("<button>");
@@ -22,12 +24,25 @@ $(document).ready(function() {
 
 	}
 
+
+	// on click event for the form to add buttons
+	$("#add-anime").on("click", function(e) {
+
+		event.preventDefault();
+
+		const animeAdded = $("#anime-input").val();
+
+		topics.push(animeAdded);
+
+		addButtons();
+	})
+
 	addButtons();
-	
+
+
 
 	// on click event that searchs fot the button clicked on giphy and adds the image and rating to the html
-	// inner on click event to animate and pause gifs
-	$("button").on("click", function() {
+	$("button").on("click", function(e) {
 		
 		const search = $(this).attr("data-name");
 
@@ -56,14 +71,12 @@ $(document).ready(function() {
 
 				animeImage.attr("src", results[i].images.original_still.url);
 
-				
 
 				gifDiv.prepend(p);
 				gifDiv.prepend(animeImage);
 				$("#gif-area").prepend(gifDiv);
 
-
-
+				// inner on click event to animate and pause gifs
 				$(".gif").on("click", function() {
 
 					let static = animeImage.attr("src", results[i].images.original_still.url)
@@ -73,31 +86,23 @@ $(document).ready(function() {
 					if (static) {
 
 						animated
+						console.log("start moving")
 
-					} else {
+					} else if (animated) {
 
 						static
+						console.log("stoppppppp")
 
 					}
 
 				});
+
 
 			}
 
 		});
 
 	});
-
-
-	
-
-
-
-
-	
-
-
-
 
 
 
