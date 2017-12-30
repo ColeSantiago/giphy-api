@@ -1,7 +1,7 @@
 $(document).ready(function() {
 
 	// array of things to search
-	let topics = ["my hero acadamia", "tokyo ghoul", "akame ga kill", "your lie in april", "elfen lied", "death parade", "noragami", "twin star exorcists", "steins gate", "samurai champloo", "mob psycho 100"];
+	let topics = ["my hero academia", "tokyo ghoul", "akame ga kill", "your lie in april", "elfen lied", "death parade", "noragami", "twin star exorcists", "steins gate", "samurai champloo", "mob psycho 100"];
 
 	
 
