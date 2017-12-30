@@ -15,15 +15,59 @@ $(document).ready(function() {
 
 			buttons.text(topics[i]);
 
-			$("#gif-area").append(buttons);
-
-
+			$("#button-area").append(buttons);
 		}
 
 	}
 
-
 	addButtons();
+	
+
+
+	$("button").on("click", function() {
+		
+
+		const search = $(this).attr("data-name");
+		
+
+		const queryURL = "https://api.giphy.com/v1/gifs/search?q=" +
+        search + "&api_key=dc6zaTOxFJmzC&limit=10";
+
+		$.ajax({
+			url: queryURL,
+			method: "GET"
+		})
+		.done(function(response) {
+			console.log(response);
+
+			const results = response.data;
+
+			for (let i = 0; i < results.length; i++) {
+
+				const gifDiv = $("<div class='item'>");
+
+				const rating = results[i].rating;
+
+				const p = $("<p>").text("Rating: " + rating);
+
+				const animeImage = $("<img>");
+				animeImage.attr("src", results[i].images.original_still.url);
+
+				gifDiv.prepend(p);
+				gifDiv.prepend(animeImage);
+				$("#gif-area").prepend(gifDiv);
+
+			}
+
+
+		});
+
+	});
+
+
+
+
+	
 
 
 
