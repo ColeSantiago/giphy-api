@@ -1,9 +1,86 @@
 $(document).ready(function() {
 
-	// array of buttons
+	// array of things to search
 	let topics = ["my hero acadamia", "tokyo ghoul", "akame ga kill", "your lie in april", "erased", "death parade", "noragami", "twin star exorcists", "steins gate", "samurai champloo", "mob psycho 100"];
 
 	
+
+	// function that searches for the button clicked on giphy and adds the image and rating to the html
+	function displayGif() {
+		
+		const search = $(this).attr("data-name");
+
+		const queryURL = "https://api.giphy.com/v1/gifs/search?q=" +
+        search + "&api_key=dc6zaTOxFJmzC&limit=10";
+
+		$.ajax({
+			url: queryURL,
+			method: "GET"
+		})
+		.done(function(response) {
+			console.log(response);
+
+			const results = response.data;
+
+			for (let i = 0; i < results.length; i++) {
+
+				const gifDiv = $("<div class='item'>");
+
+				const rating = results[i].rating;
+
+				const p = $("<p>").text("Rating: " + rating);
+
+				const animeImage = $("<img>");
+				animeImage.addClass("gif");
+				animeImage.attr("src", results[i].images.original_still.url);
+
+
+				gifDiv.prepend(p);
+				gifDiv.prepend(animeImage);
+				$("#gif-area").prepend(gifDiv);
+
+
+				// hover event to animate and pause gifs
+				$(".gif").hover( function() {
+
+					let static = results[i].images.original_still.url
+
+					if (static) {
+
+						let src = $(this).attr("src");
+
+	    				$(this).attr('src', src.replace(results[i].images.original_still.url, results[i].images.fixed_height.url));
+	    				
+					} 
+
+				$(".gif").mouseleave( function() {
+
+					let static = results[i].images.original_still.url
+
+					if (static) {
+
+						let src = $(this).attr("src");
+
+		    			$(this).attr('src', src.replace(results[i].images.fixed_height.url, results[i].images.original_still.url));
+		    			
+	    					
+
+					} 
+
+				})
+
+				});
+
+			}
+
+		});
+
+	};
+
+
+
+
+
 	// function to add the array to the html in button form
 	function addButtons() {
 
@@ -37,84 +114,11 @@ $(document).ready(function() {
 		addButtons();
 	})
 
+
+	// the on click that searches for stuff by running the function
+	$(document).on("click", ".animes", displayGif);
+
 	addButtons();
-
-
-
-	// on click event that searchs fot the button clicked on giphy and adds the image and rating to the html
-	$("button").on("click", function(e) {
-		
-		const search = $(this).attr("data-name");
-
-		const queryURL = "https://api.giphy.com/v1/gifs/search?q=" +
-        search + "&api_key=dc6zaTOxFJmzC&limit=10";
-
-		$.ajax({
-			url: queryURL,
-			method: "GET"
-		})
-		.done(function(response) {
-			console.log(response);
-
-			const results = response.data;
-
-			for (let i = 0; i < results.length; i++) {
-
-				const gifDiv = $("<div class='item'>");
-
-				const rating = results[i].rating;
-
-				const p = $("<p>").text("Rating: " + rating);
-
-				const animeImage = $("<img>");
-				animeImage.addClass("gif");
-
-				animeImage.attr("src", results[i].images.original_still.url);
-
-
-				gifDiv.prepend(p);
-				gifDiv.prepend(animeImage);
-				$("#gif-area").prepend(gifDiv);
-
-				// inner on click event to animate and pause gifs
-				$(".gif").on("click", function() {
-
-					let static = animeImage.attr("src", results[i].images.original_still.url)
-
-					let animated = animeImage.attr("src", results[i].images.fixed_height.url)
-
-					if (static) {
-
-						animated
-						console.log("start moving")
-
-					} else if (animated) {
-
-						static
-						console.log("stoppppppp")
-
-					}
-
-				});
-
-
-			}
-
-		});
-
-	});
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
