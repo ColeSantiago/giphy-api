@@ -1,17 +1,19 @@
 $(document).ready(function() {
 
 	// array of things to search
-	let topics = ["my hero acadamia", "tokyo ghoul", "akame ga kill", "your lie in april", "erased", "death parade", "noragami", "twin star exorcists", "steins gate", "samurai champloo", "mob psycho 100"];
+	let topics = ["my hero acadamia", "tokyo ghoul", "akame ga kill", "your lie in april", "elfen lied", "death parade", "noragami", "twin star exorcists", "steins gate", "samurai champloo", "mob psycho 100"];
 
 	
 
 	// function that searches for the button clicked on giphy and adds the image and rating to the html
 	function displayGif() {
+
+		$("#gif-area").empty();
 		
 		const search = $(this).attr("data-name");
 
 		const queryURL = "https://api.giphy.com/v1/gifs/search?q=" +
-        search + "&api_key=dc6zaTOxFJmzC&limit=10";
+        search + "&api_key=dc6zaTOxFJmzC&limit=15";
 
 		$.ajax({
 			url: queryURL,
@@ -37,6 +39,7 @@ $(document).ready(function() {
 
 				gifDiv.prepend(p);
 				gifDiv.prepend(animeImage);
+
 				$("#gif-area").prepend(gifDiv);
 
 
@@ -50,7 +53,7 @@ $(document).ready(function() {
 						let src = $(this).attr("src");
 
 	    				$(this).attr('src', src.replace(results[i].images.original_still.url, results[i].images.fixed_height.url));
-	    				
+	    				console.log("it should be moving");
 					} 
 
 				$(".gif").mouseleave( function() {
@@ -62,7 +65,7 @@ $(document).ready(function() {
 						let src = $(this).attr("src");
 
 		    			$(this).attr('src', src.replace(results[i].images.fixed_height.url, results[i].images.original_still.url));
-		    			
+		    			console.log("it should NOT be moving");
 	    					
 
 					} 
@@ -113,7 +116,6 @@ $(document).ready(function() {
 
 		addButtons();
 	})
-
 
 	// the on click that searches for stuff by running the function
 	$(document).on("click", ".animes", displayGif);
