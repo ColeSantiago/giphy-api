@@ -42,6 +42,8 @@ $(document).ready(function() {
 
 				$("#gif-area").prepend(gifDiv);
 
+				
+
 
 				// hover event to animate and pause gifs
 				$(".gif").hover( function() {
@@ -110,11 +112,17 @@ $(document).ready(function() {
 
 		event.preventDefault();
 
-		const animeAdded = $("#anime-input").val();
+		const animeAdded = $("#anime-input").val().trim();
+
+		if (animeAdded.length === 0) {
+					return;
+				}
 
 		topics.push(animeAdded);
 
 		addButtons();
+
+		$("#anime-input").val('');
 	})
 
 	// the on click that searches for stuff by running the function
@@ -124,9 +132,5 @@ $(document).ready(function() {
 
 
 
-
-
-
-
-	// closing tag for document ready
+// closing tag for document ready
 });
