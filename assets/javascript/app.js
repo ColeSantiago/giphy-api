@@ -3,8 +3,6 @@ $(document).ready(function() {
 	// array of things to search
 	let topics = ["my hero academia", "tokyo ghoul", "akame ga kill", "your lie in april", "elfen lied", "death parade", "noragami", "twin star exorcists", "steins gate", "samurai champloo", "mob psycho 100"];
 
-	
-
 	// function that searches for the button clicked on giphy and adds the image and rating to the html
 	function displayGif() {
 
@@ -36,14 +34,10 @@ $(document).ready(function() {
 				animeImage.addClass("gif");
 				animeImage.attr("src", results[i].images.original_still.url);
 
-
 				gifDiv.prepend(p);
 				gifDiv.prepend(animeImage);
 
 				$("#gif-area").prepend(gifDiv);
-
-				
-
 
 				// hover event to animate and pause gifs
 				$(".gif").hover( function() {
@@ -68,23 +62,13 @@ $(document).ready(function() {
 
 		    			$(this).attr('src', src.replace(results[i].images.fixed_height.url, results[i].images.original_still.url));
 		    			console.log("it should NOT be moving");
-	    					
-
 					} 
-
 				})
 
 				});
-
 			}
-
 		});
-
 	};
-
-
-
-
 
 	// function to add the array to the html in button form
 	function addButtons() {
@@ -103,9 +87,7 @@ $(document).ready(function() {
 
 			$("#button-area").append(buttons);
 		}
-
 	}
-
 
 	// on click event for the form to add buttons
 	$("#add-anime").on("click", function(e) {
@@ -129,8 +111,6 @@ $(document).ready(function() {
 	$(document).on("click", ".animes", displayGif);
 
 	addButtons();
-
-
 
 // closing tag for document ready
 });
